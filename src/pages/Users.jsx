@@ -1,13 +1,21 @@
 import React from 'react'
+import { useEffect } from 'react'
 import { useState } from 'react'
 
 export default function Users() {
 
 const [users, setUsers] = useState([])
 
-  fetch("http://localhost:4000/users")
+useEffect(() => {
+  fetch("http://localhost:4000/users", {
+    method: "GET",
+    headers: {
+      'Access-Control-Allow-Origin': "*"
+    }
+  })
     .then(res => res.json())
     .then(data => setUsers(data))
+}, [])
 
   return (
     <>
