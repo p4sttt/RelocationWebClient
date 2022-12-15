@@ -1,11 +1,8 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import { Navigate } from 'react-router-dom'
 
 export default function Home() {
   return (
-    <>
-      <h1>Home page</h1>
-      <Link to="/users">chek all users</Link>
-    </>
+    <Navigate to="/login" />
   )
 }
