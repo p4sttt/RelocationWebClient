@@ -1,23 +1,35 @@
 import React from "react";
 import Form from "../components/Form";
 import axios from "../axios";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 export default function Login() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  const hendleSubmit = (e) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const {signin} = useAuth()
+
+  const from = location.state?.from?.pathname || "/";
+
+  const hendleSubmit = async (e) => {
     e.preventDefault();
-      axios({
-        method: "post",
-        url: "/auth/login",
-        data: {
-          email: email,
-          password: password
-        },
+    await axios({
+      method: "post",
+      url: "/auth/login",
+      data: {
+        email: email,
+        password: password,
+      },
+    })
+      .then((res) => {
+        signin(res.data.token, () => navigate(from, {replace: true}))
       })
-      .then(res => {console.log(res.data.token)})
-      .catch(err => console.log(err.response.data))
+      .catch((err) => {
+        console.log(err.response.data);
+      });
   };
 
   return (
