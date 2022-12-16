@@ -1,11 +1,11 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
-import "./components.scss"
+import React from "react";
+import { Outlet } from "react-router-dom";
+import "./components.scss";
 
 export default function Layout() {
   return (
-    <div className='container'>
+    <div className="container">
       <Outlet />
     </div>
-  )
+  );
 }

@@ -10,7 +10,7 @@ export default function Login() {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const {signin} = useAuth()
+  const { signin } = useAuth();
 
   const from = location.state?.from?.pathname || "/";
 
@@ -25,7 +25,7 @@ export default function Login() {
       },
     })
       .then((res) => {
-        signin(res.data.token, () => navigate(from, {replace: true}))
+        signin(res.data.token, () => navigate(from, { replace: true }));
       })
       .catch((err) => {
         console.log(err.response.data);
