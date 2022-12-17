@@ -10,8 +10,13 @@ export const AuthProvider = ({ children }) => {
     cd();
   };
 
+  const singout = (cd) => {
+    setToken(null)
+    cd()
+  }
+
   return (
-    <AuthContext.Provider value={{ token, signin }}>
+    <AuthContext.Provider value={{ token, signin, singout }}>
       {children}
     </AuthContext.Provider>
   );

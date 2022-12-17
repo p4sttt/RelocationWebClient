@@ -4,6 +4,8 @@ import axios from "../axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
+import "../index.scss";
+
 export default function Login() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -12,9 +14,9 @@ export default function Login() {
   const navigate = useNavigate();
   const { signin } = useAuth();
 
-  const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/dashboard";
 
-  const hendleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     await axios({
       method: "post",
@@ -35,21 +37,34 @@ export default function Login() {
   return (
     <div className="wrapper">
       <h1>Login</h1>
-      <form className="forms" onSubmit={hendleSubmit}>
+      <form className="forms" onSubmit={handleSubmit}>
         <Form
-          name="email"
+          value={email}
           type="email"
           placeholder="email"
           onValueChange={(email) => setEmail(email)}
         />
         <Form
-          name="password"
+          value={password}
           type="password"
           placeholder="password"
           onValueChange={(password) => setPassword(password)}
           is_password={true}
         />
-        <button type="submit">Login</button>
+        <button
+          className="btn-default"
+          type="submit"
+          style={{ marginTop: 16, width: 350 }}
+        >
+          Sign in
+        </button>
+        <button
+          className="btn-outline"
+          style={{ width: 350 }}
+          onClick={() => navigate("/register")}
+        >
+          Register
+        </button>
       </form>
     </div>
   );

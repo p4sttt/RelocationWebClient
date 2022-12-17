@@ -26,7 +26,6 @@ export default function Form(props) {
       <input
         autoComplete="off"
         placeholder={props.placeholder}
-        name={props.name}
         type={type}
         onChange={(e) => props.onValueChange(e.target.value)}
       />

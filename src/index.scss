@@ -29,13 +29,54 @@ body {
   width: fit-content;
 }
 button {
-  background: #e0e0e0;
-  border: 1px solid #292929;
   border-radius: 16px;
   font-weight: 600;
   font-size: 20px;
   line-height: 24px;
-  color: #0a0a0a;
-  width: 350px;
   padding: 24px;
+}
+.btn-default {
+  background: #e0e0e0;
+  border: 1px solid #292929;
+  border-radius: 16px;
+  color: #0a0a0a;
+}
+.btn-outline {
+  background: none;
+  border: 2px solid #e0e0e0;
+  border-radius: 16px;
+  color: #e0e0e0;
+}
+.btn-secondary {
+  background: #141414;
+  border-radius: 16px;
+  color: #e0e0e0;
+  font-size: 64px;
+  padding: 48px;
+}
+.steps {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+.circle {
+  background: #e0e0e0;
+  border-radius: 100%;
+  width: 8px;
+  height: 8px;
+  bottom: 8px;
+}
+.settings {
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+.temperature-btns{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 }
