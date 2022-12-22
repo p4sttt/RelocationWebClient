@@ -6,7 +6,7 @@ import Form from "../../components/Form";
 
 export default function SettingCountries() {
   const [countries, setCountries] = useState(null);
-  const [text, setText] = useState("");
+  const [searchCountries, setSearchCountries] = useState("");
   const selectedCountries = [];
 
   useEffect(() => {
@@ -37,11 +37,11 @@ export default function SettingCountries() {
       <Form
         placeholder="Type country"
         type="text"
-        onValueChange={(data) => setText(data)}
+        onValueChange={(data) => setSearchCountries(data)}
       />
       <div className="countries" style={{ marginTop: 16 }}>
         {countries ? (
-          countries.map((country) => (
+          countries.filter((country) => country.name.common.toLocaleLowerCase().includes(searchCountries.toLocaleLowerCase())).map((country) => (
             <div
               className="country"
               key={country.name.official}
