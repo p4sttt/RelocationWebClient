@@ -6,7 +6,7 @@ import axios from "../../axios";
 
 export default function SettingTags() {
   const navigate = useNavigate();
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState(null);
   const selectedTags = [];
 
   useEffect(() => {
@@ -35,16 +35,20 @@ export default function SettingTags() {
         things
       </h1>
       <div className="tags">
-        {tags?.map((tag) => (
-          <div
-            onClick={() => handleClick(tag)}
-            className="tag"
-            key={tag._id}
-            id={tag._id}
-          >
-            {tag.tag}
-          </div>
-        ))}
+        {tags ? (
+          tags.map((tag) => (
+            <div
+              onClick={() => handleClick(tag)}
+              className="tag"
+              key={tag._id}
+              id={tag._id}
+            >
+              {tag.tag}
+            </div>
+          ))
+        ) : (
+          <p>loading...</p>
+        )}
       </div>
       <button
         onClick={() =>

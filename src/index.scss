@@ -137,3 +137,30 @@ button {
 .number-active {
   color: #e0e0e0;
 }
+.countries {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.country {
+  width: 160px;
+  height: 211px;
+  background: #292929;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  img {
+  box-sizing: border-box;
+  height: 211px;
+  }
+}
+.country-selected {
+  border: 2px solid #fff;
+}
