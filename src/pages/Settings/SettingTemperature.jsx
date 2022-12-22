@@ -7,7 +7,7 @@ export default function SettingTemperature() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="wrapper" style={{width: 525}}>
+    <div className="wrapper" style={{width: 600}}>
       <h1>
         Choose comfortable
         <br />
@@ -19,7 +19,7 @@ export default function SettingTemperature() {
         </button>
         <button
           className="btn-secondary"
-          style={{ width: 250 }}
+          style={{ width: 320 }}
           onClick={() => navigate("/settings/tags", { replace: true, state: {temperature: count} })}
         >
           {count}°C

@@ -13,7 +13,7 @@ export default function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    navigate("/settings", { replace: true });
+    navigate("/settings/temperature", { replace: true });
   };
 
   return (

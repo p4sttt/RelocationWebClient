@@ -13,6 +13,7 @@ import SettingTemperature from "./pages/Settings/SettingTemperature"
 import SettingTags from "./pages/Settings/SettingTags";
 
 import "./index.scss";
+import SettingCountries from "./pages/Settings/SettingCountries";
 
 function App() {
   return (
@@ -23,8 +24,9 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="settings/*" element={<Setting />} >
-            <Route path="temperature" element={<SettingTemperature />}/>
+            <Route path="temperature" element={<SettingTemperature />} />
             <Route path="tags" element={<SettingTags />} />
+            <Route path="countries" element={<SettingCountries />} />
           </Route >
           <Route
             path="dashboard"
