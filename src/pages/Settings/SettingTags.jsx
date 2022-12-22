@@ -50,16 +50,6 @@ export default function SettingTags() {
           <p>loading...</p>
         )}
       </div>
-      <button
-        onClick={() =>
-          navigate("/settings/countries", {
-            replace: true,
-            state: { tags: selectedTags },
-          })
-        }
-      >
-        click
-      </button>
     </div>
   );
 }
