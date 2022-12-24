@@ -28,7 +28,7 @@ export default function SettingCountries() {
   };
 
   return (
-    <div className="wrapper" style={{ width: 600 }}>
+    <div className="wrapper" style={{ width: 600, marginBottom: 200 }}>
       <h1>
         Choose a country
         <br />

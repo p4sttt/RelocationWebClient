@@ -1,13 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "../../axios";
+import { useSettings } from "../../hooks/useSettings";
 
 export default function SettingTags() {
-  const navigate = useNavigate();
+  const { setTags_, returnSettings } = useSettings();
   const [tags, setTags] = useState(null);
-  const selectedTags = [];
+
+  const selectedTags = returnSettings().tags;
 
   useEffect(() => {
     axios({
@@ -17,13 +18,15 @@ export default function SettingTags() {
   }, []);
 
   const handleClick = (tag) => {
-    const element = document.getElementById(tag._id);
+    const element = document.getElementById(tag._id)
     if (selectedTags.includes(tag.tag)) {
-      selectedTags.splice(selectedTags.indexOf(tag.tag), 1);
-      element.classList.toggle("tag-active");
+      selectedTags.splice(selectedTags.indexOf(tag.tag), 1)
+      setTags_(selectedTags)
+      element.classList.toggle("tag-active")
     } else {
-      selectedTags.push(tag.tag);
-      element.classList.toggle("tag-active");
+      selectedTags.push(tag.tag)
+      setTags_(selectedTags)
+      element.classList.toggle("tag-active")
     }
   };
 
@@ -39,7 +42,7 @@ export default function SettingTags() {
           tags.map((tag) => (
             <div
               onClick={() => handleClick(tag)}
-              className="tag"
+              className={selectedTags.includes(tag.tag) ? "tag tag-active" : "tag"}
               key={tag._id}
               id={tag._id}
             >

@@ -1,30 +1,43 @@
 import React from "react";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSettings } from "../../hooks/useSettings";
 
 export default function SettingTemperature() {
+  const { setTemperature_, returnSettings } = useSettings();
   const navigate = useNavigate();
-  const [count, setCount] = useState(0);
+
+  const temperature = returnSettings().temperature;
 
   return (
-    <div className="wrapper" style={{width: 600}}>
+    <div className="wrapper" style={{ width: 600 }}>
       <h1>
         Choose comfortable
         <br />
         temperature
       </h1>
       <div className="temperature-btns">
-        <button className="btn-secondary" onClick={() => setCount(count - 1)}>
+        <button
+          className="btn-secondary"
+          onClick={() => setTemperature_(temperature - 1)}
+        >
           -
         </button>
         <button
           className="btn-secondary"
           style={{ width: 320 }}
-          onClick={() => navigate("/settings/tags", { replace: true, state: {temperature: count} })}
+          onClick={() =>
+            navigate("/settings/tags", {
+              replace: true,
+              state: { temperature: temperature },
+            })
+          }
         >
-          {count}°C
+          {temperature}°C
         </button>
-        <button className="btn-secondary" onClick={() => setCount(count + 1)}>
+        <button
+          className="btn-secondary"
+          onClick={() => setTemperature_(temperature + 1)}
+        >
           +
         </button>
       </div>
