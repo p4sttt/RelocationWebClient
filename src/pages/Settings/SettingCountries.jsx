@@ -3,11 +3,13 @@ import { useEffect } from "react";
 import { useState } from "react";
 import axios from "../../axios";
 import Form from "../../components/Form";
+import { useSettings } from "../../hooks/useSettings";
 
 export default function SettingCountries() {
+  const {setCountries_, returnSettings} = useSettings()
   const [countries, setCountries] = useState(null);
   const [searchCountries, setSearchCountries] = useState("");
-  const selectedCountries = [];
+  const selectedCountries = returnSettings().countries
 
   useEffect(() => {
     axios({
@@ -20,9 +22,11 @@ export default function SettingCountries() {
     const element = document.getElementById(country.name.common);
     if (selectedCountries.includes(country.name.common)) {
       selectedCountries.splice(selectedCountries.indexOf(country.name.common));
+      setCountries_(selectedCountries)
       element.classList.toggle("country-selected");
     } else {
       selectedCountries.push(country.name.common);
+      setCountries_(selectedCountries)
       element.classList.toggle("country-selected");
     }
   };
@@ -43,7 +47,7 @@ export default function SettingCountries() {
         {countries ? (
           countries.filter((country) => country.name.common.toLocaleLowerCase().includes(searchCountries.toLocaleLowerCase())).map((country) => (
             <div
-              className="country"
+              className={selectedCountries.includes(country.name.common) ? "country country-selected" : "country"}
               key={country.name.official}
               onClick={() => handleClick(country)}
               id={country.name.common}

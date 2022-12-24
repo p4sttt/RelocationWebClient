@@ -12,7 +12,7 @@ export default function Setting() {
         {location.pathname === "/settings/temperature" ? (
           <div className="number number-active" onClick={() => navigate("temperature")}>
             1
-          </div>
+          </div>  
         ) : (
           <div className="number" onClick={() => navigate("temperature")}>
             1
