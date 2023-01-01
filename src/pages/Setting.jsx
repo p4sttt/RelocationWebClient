@@ -5,21 +5,28 @@ export default function Setting() {
   const navigate = useNavigate();
   const location = useLocation();
 
+
   return (
     <div className="settings">
       <Outlet />
       <div className="steps">
         {location.pathname === "/settings/temperature" ? (
-          <div className="number number-active" onClick={() => navigate("temperature")}>
+          <div
+            className="number number-active"
+            onClick={() => navigate("temperature")}
+          >
             1
-          </div>  
+          </div>
         ) : (
           <div className="number" onClick={() => navigate("temperature")}>
             1
           </div>
         )}
         {location.pathname === "/settings/tags" ? (
-          <div className="number number-active" onClick={() => navigate("tags")}>
+          <div
+            className="number number-active"
+            onClick={() => navigate("tags")}
+          >
             2
           </div>
         ) : (
@@ -28,7 +35,10 @@ export default function Setting() {
           </div>
         )}
         {location.pathname === "/settings/countries" ? (
-          <div className="number number-active" onClick={() => navigate("countries")}>
+          <div
+            className="number number-active"
+            onClick={() => navigate("countries")}
+          >
             3
           </div>
         ) : (

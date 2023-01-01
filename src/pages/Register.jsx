@@ -1,10 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 import Form from "../components/Form";
+import axios from "../axios";
 
 export default function Register() {
   const navigate = useNavigate();
+  const { signin } = useAuth();
 
   const [email, setEmail] = useState();
   const [name, setName] = useState();
@@ -12,8 +15,21 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    navigate("/settings/temperature", { replace: true });
+    axios({
+      method: "post",
+      url: "/auth/registration",
+      data: {
+        email: email,
+        name: name,
+        password: password
+      }
+    })
+    .then((res) => {
+      signin(res.data.token, () => navigate("/settings/temperature", { replace: true }))
+    })
+    .catch((err) => {
+      console.log(err.response.data);
+    });
   };
 
   return (
