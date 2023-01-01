@@ -18,8 +18,8 @@ export default function SettingCountries() {
   useEffect(() => {
     axios({
       method: "GET",
-      url: "https://restcountries.com/v3.1/all",
-    }).then((countries) => setCountries(countries.data));
+      url: "/countries",
+    }).then((countries) => setCountries(countries.data.countries));
   }, []);
 
   const setSettings = () => {
@@ -40,13 +40,13 @@ export default function SettingCountries() {
   };
 
   const handleClick = (country) => {
-    const element = document.getElementById(country.name.common);
-    if (selectedCountries.includes(country.name.common)) {
-      selectedCountries.splice(selectedCountries.indexOf(country.name.common));
+    const element = document.getElementById(country.name);
+    if (selectedCountries.includes(country.name)) {
+      selectedCountries.splice(selectedCountries.indexOf(country.name));
       setCountries_(selectedCountries);
       element.classList.toggle("country-selected");
     } else {
-      selectedCountries.push(country.name.common);
+      selectedCountries.push(country.name);
       setCountries_(selectedCountries);
       element.classList.toggle("country-selected");
     }
@@ -68,22 +68,22 @@ export default function SettingCountries() {
         {countries ? (
           countries
             .filter((country) =>
-              country.name.common
+              country.name
                 .toLocaleLowerCase()
                 .includes(searchCountries.toLocaleLowerCase())
             )
             .map((country) => (
               <div
                 className={
-                  selectedCountries.includes(country.name.common)
+                  selectedCountries.includes(country.name)
                     ? "country country-selected"
                     : "country"
                 }
-                key={country.name.official}
+                key={country._id}
                 onClick={() => handleClick(country)}
-                id={country.name.common}
+                id={country.name}
               >
-                <img src={country.flags.svg} alt={country.name.common} />
+                <img src={country.img} alt={country.name} />
               </div>
             ))
         ) : (
