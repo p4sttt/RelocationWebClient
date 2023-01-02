@@ -31,7 +31,7 @@ export default function SettingTags() {
   };
 
   return (
-    <div className="wrapper" style={{ width: 600, paddingBottom: 240 }}>
+    <div className="wrapper margin-top" style={{ width: 600, paddingBottom: 240 }}>
       <h1>
         Choose interesting
         <br />

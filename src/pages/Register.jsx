@@ -33,7 +33,7 @@ export default function Register() {
   };
 
   return (
-    <div className="wrapper">
+    <div className="wrapper margin-top">
       <h1>Register</h1>
       <form className="forms" onSubmit={handleSubmit}>
         <Form

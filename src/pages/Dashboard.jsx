@@ -6,6 +6,7 @@ import Header from "../components/Header";
 export default function Dashboard() {
   const { token } = useAuth();
   const [user, setUser] = useState({});
+  const [countries, setCountries] = useState([]);
 
   useEffect(() => {
     axios({
@@ -22,7 +23,12 @@ export default function Dashboard() {
   return (
     <>
       <Header name={user.name} />
-      <h1>Slava Ukraine</h1>
+      <div className="countries-dashboard">
+        <h1>Your countries</h1>
+        <div className="countries-elements">
+          
+        </div>
+      </div>
     </>
   );
 }

@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   width: 75vw;
-  margin-top: 100px;
+  // margin-top: 100px;
 }
 .form {
   width: 350px;
@@ -28,22 +28,29 @@
     outline: none;
   }
 }
-.header {
+.header-container{
   width: 100vw;
-  padding-left: 32px;
-  padding-right: 32px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: #0a0a0a;
+  border-bottom: 0.5px solid #3e3e3e;
+  padding: 32px 0;
+}
+.header {
+  width: 730px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0px;
 
   .user-info {
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 0px;
-    gap: 24px;
+    gap: 16px;
   }
   .avatar {
     width: 64px;

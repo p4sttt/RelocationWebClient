@@ -9,7 +9,7 @@ export default function SettingTemperature() {
   const temperature = returnSettings().temperature;
 
   return (
-    <div className="wrapper" style={{ width: 600 }}>
+    <div className="wrapper margin-top" style={{ width: 600 }}>
       <h1>
         Choose comfortable
         <br />

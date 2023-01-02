@@ -7,7 +7,7 @@ export default function Setting() {
 
 
   return (
-    <div className="settings">
+    <div className="settings margin-top">
       <Outlet />
       <div className="steps">
         {location.pathname === "/settings/temperature" ? (

@@ -19,7 +19,7 @@ export default function SettingCountries() {
     axios({
       method: "GET",
       url: "/countries",
-    }).then((countries) => setCountries(countries.data.countries));
+    }).then((res) => setCountries(res.data.countries));
   }, []);
 
   const setSettings = () => {
@@ -53,7 +53,7 @@ export default function SettingCountries() {
   };
 
   return (
-    <div className="wrapper" style={{ width: 600, marginBottom: 200 }}>
+    <div className="wrapper margin-top" style={{ width: 600, marginBottom: 200 }}>
       <h1>
         Choose a country
         <br />
