@@ -9,6 +9,7 @@ import "../index.scss";
 export default function Login() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [error, setError] = React.useState(null);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -29,43 +30,50 @@ export default function Login() {
       .then((res) => {
         signin(res.data.token, () => navigate(from, { replace: true }));
       })
-      .catch((err) => {
-        console.log(err.response.data);
+      .catch((res) => {
+        setError(res.response.data.msg);
       });
   };
 
   return (
-    <div className="wrapper margin-top">
-      <h1>Login</h1>
-      <form className="forms" onSubmit={handleSubmit}>
-        <Form
-          value={email}
-          type="email"
-          placeholder="email"
-          onValueChange={(email) => setEmail(email)}
-        />
-        <Form
-          value={password}
-          type="password"
-          placeholder="password"
-          onValueChange={(password) => setPassword(password)}
-          is_password={true}
-        />
-        <button
-          className="btn-default"
-          type="submit"
-          style={{ marginTop: 16, width: 350 }}
-        >
-          Sign in
-        </button>
-        <button
-          className="btn-outline"
-          style={{ width: 350 }}
-          onClick={() => navigate("/register")}
-        >
-          Register
-        </button>
-      </form>
-    </div>
+    <>
+      <div className="wrapper margin-top">
+        <h1>Login</h1>
+        <form className="forms" onSubmit={handleSubmit}>
+          <Form
+            value={email}
+            type="email"
+            placeholder="email"
+            onValueChange={(email) => setEmail(email)}
+          />
+          <Form
+            value={password}
+            type="password"
+            placeholder="password"
+            onValueChange={(password) => setPassword(password)}
+            is_password={true}
+          />
+          <button
+            className="btn-default"
+            type="submit"
+            style={{ marginTop: 16, width: 350 }}
+          >
+            Sign in
+          </button>
+          <button
+            className="btn-outline"
+            style={{ width: 350 }}
+            onClick={() => navigate("/register")}
+          >
+            Register
+          </button>
+        </form>
+      </div>
+      {error ? 
+      <div className="error">
+        <h1>Error</h1>
+        <p>{error}</p>
+      </div> : <></>}
+    </>
   );
 }

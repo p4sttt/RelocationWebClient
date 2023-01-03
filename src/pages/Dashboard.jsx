@@ -18,6 +18,15 @@ export default function Dashboard() {
     })
       .then((res) => setUser(res.data.user))
       .catch((res) => console.log(res.data.msg));
+    axios({
+      url: "/user/countries",
+      method: "get",
+      headers: {
+        token: token,
+      },
+    })
+      .then((res) => setCountries(res.data.userCountries))
+      .catch((res) => console.log(res.data.msg));
   }, [token]);
 
   return (
@@ -26,7 +35,15 @@ export default function Dashboard() {
       <div className="countries-dashboard">
         <h1>Your countries</h1>
         <div className="countries-elements">
-          
+          {countries ? (
+            countries.map((country) => (
+              <div className="country" key={country._id}>
+                <img alt={country.name} src={country.img} />
+              </div>
+            ))
+          ) : (
+            <p>loading...</p>
+          )}
         </div>
       </div>
     </>
