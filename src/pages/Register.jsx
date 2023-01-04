@@ -4,14 +4,16 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import Form from "../components/Form";
 import axios from "../axios";
+import ErrorBox from "../components/ErrorBox";
 
 export default function Register() {
   const navigate = useNavigate();
   const { signin } = useAuth();
 
-  const [email, setEmail] = useState();
-  const [name, setName] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,15 +23,17 @@ export default function Register() {
       data: {
         email: email,
         name: name,
-        password: password
-      }
+        password: password,
+      },
     })
-    .then((res) => {
-      signin(res.data.token, () => navigate("/settings/temperature", { replace: true }))
-    })
-    .catch((err) => {
-      console.log(err.response.data);
-    });
+      .then((res) => {
+        signin(res.data.token, () =>
+          navigate("/settings/temperature", { replace: true })
+        );
+      })
+      .catch((err) => {
+        setError(err.response.data.msg);
+      });
   };
 
   return (
@@ -70,6 +74,7 @@ export default function Register() {
           Login
         </button>
       </form>
+      <ErrorBox error={error} />
     </div>
   );
 }

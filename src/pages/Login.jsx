@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 import "../index.scss";
+import ErrorBox from "../components/ErrorBox";
 
 export default function Login() {
   const [email, setEmail] = React.useState("");
@@ -17,9 +18,9 @@ export default function Login() {
 
   const from = location.state?.from?.pathname || "/dashboard";
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    await axios({
+    axios({
       method: "post",
       url: "/auth/login",
       data: {
@@ -69,11 +70,7 @@ export default function Login() {
           </button>
         </form>
       </div>
-      {error ? 
-      <div className="error">
-        <h1>Error</h1>
-        <p>{error}</p>
-      </div> : <></>}
+      <ErrorBox error={error} />
     </>
   );
 }

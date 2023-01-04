@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import axios from "../axios";
 import Header from "../components/Header";
+import "../index.scss"
 
 export default function Dashboard() {
   const { token } = useAuth();
   const [user, setUser] = useState({});
   const [countries, setCountries] = useState([]);
+  const [news, setNews] = useState([]);
 
   useEffect(() => {
     axios({
@@ -39,6 +41,20 @@ export default function Dashboard() {
             countries.map((country) => (
               <div className="country" key={country._id}>
                 <img alt={country.name} src={country.img} />
+              </div>
+            ))
+          ) : (
+            <p>loading...</p>
+          )}
+        </div>
+      </div>
+      <div className="news-dashboard">
+        <h1>Latest news</h1>
+        <div className="news-elements">
+          {news ? (
+            news.map((news) => (
+              <div className="news" key={news._id}>
+                <img alt={news.title} src={news.img} />
               </div>
             ))
           ) : (

@@ -28,7 +28,7 @@
     outline: none;
   }
 }
-.header-container{
+.header-container {
   width: 100vw;
   display: flex;
   flex-direction: row;
@@ -63,5 +63,41 @@
     font-size: 32px;
     line-height: 120%;
     color: #e0e0e0;
+  }
+}
+.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px 48px 24px 24px;
+  gap: 8px;
+  background: #cc0000;
+  border-radius: 16px;
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  h1 {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 100%;
+    color: #ffffff;
+  }
+  p {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    width: fit-content;
+  }
+  img{
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 16px;
+    top: 16px;
   }
 }
