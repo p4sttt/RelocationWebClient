@@ -12,6 +12,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  overflow-x: hidden;
 }
 *::-webkit-scrollbar {
   height: 8px;
@@ -197,9 +198,6 @@ button {
     border-radius: 24px;
     background: #292929;
     overflow: hidden;
-    .img {
-      width: 160px;
-    }
   }
 }
 .news-dashboard {
@@ -210,21 +208,28 @@ button {
   padding: 0px;
   gap: 16px;
   width: 730px;
-  overflow-x: scroll;
+  overflow: hidden;
   h1 {
     position: absolute;
   }
 }
 .news-elements {
   margin-top: 64px;
-  background: #292929;  
-  border-radius: 16px;
-  width: 350px;
-  height: 200px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   padding: 0px;
   gap: 30px;
   flex-wrap: wrap;
+  .news {
+    background: #292929;
+    border-radius: 16px;
+    width: 350px;
+    height: 200px;
+    overflow: hidden;
+    img {
+      height: 200px;
+      width: 100%;
+    }
+  }
 }

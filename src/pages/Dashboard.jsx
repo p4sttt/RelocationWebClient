@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import axios from "../axios";
 import Header from "../components/Header";
-import "../index.scss"
+import "../index.scss";
 
 export default function Dashboard() {
   const { token } = useAuth();
@@ -19,7 +19,7 @@ export default function Dashboard() {
       },
     })
       .then((res) => setUser(res.data.user))
-      .catch((res) => console.log(res.data.msg));
+      .catch((res) => console.log(res.response.data.msg));
     axios({
       url: "/user/countries",
       method: "get",
@@ -28,7 +28,17 @@ export default function Dashboard() {
       },
     })
       .then((res) => setCountries(res.data.userCountries))
-      .catch((res) => console.log(res.data.msg));
+      .catch((res) => console.log(res.response.data.msg));
+
+    axios({
+      url: "/news",
+      method: "get",
+      headers: {
+        token: token,
+      },
+    })
+      .then((res) => setNews(res.data.news))
+      .catch((res) => console.log(res.response.data.msg));
   }, [token]);
 
   return (
@@ -48,14 +58,19 @@ export default function Dashboard() {
           )}
         </div>
       </div>
-      <div className="news-dashboard">
+      <div className="news-dashboard" style={{ marginBottom: 150 }}>
         <h1>Latest news</h1>
         <div className="news-elements">
           {news ? (
             news.map((news) => (
-              <div className="news" key={news._id}>
-                <img alt={news.title} src={news.img} />
-              </div>
+              <a
+                className="news"
+                key={news.publishedAt}
+                href={news.url}
+                target="_ blank"
+              >
+                <img alt={news.title} src={news.urlToImage} />
+              </a>
             ))
           ) : (
             <p>loading...</p>
