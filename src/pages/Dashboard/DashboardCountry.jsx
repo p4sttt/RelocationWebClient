@@ -1,8 +1,9 @@
 import React from "react";
-import axios from "../axios";
+import axios from "../../axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import AgencyCard from "../components/AgencyCard/AgencyCard";
+import AgencyCard from "../../components/AgencyCard/AgencyCard";
+import Header from "../../components/Header/Header";
 
 export default function DashboardCountry() {
   const { country } = useParams();
@@ -11,7 +12,7 @@ export default function DashboardCountry() {
 
   useEffect(() => {
     axios({
-      url: "http://localhost:4000/agencies",
+      url: "/agencies",
       method: "get",
       headers: {
         country: country,
@@ -27,7 +28,7 @@ export default function DashboardCountry() {
     <div className="agencies-main">
       <div className="agencies-title">
         <img
-          src="/arrow-forward-outline.svg"
+          src="/icons/arrow-forward-outline.svg"
           alt="arrow-forward-outline"
           onClick={() => navigate(-1)}
         />
@@ -36,8 +37,8 @@ export default function DashboardCountry() {
       {agencies ? (
         <div className="agencies">
           {agencies.map((agency) => (
-          <AgencyCard name={agency.name} key={agency._id}/>
-          ))} 
+            <AgencyCard name={agency.name} key={agency._id} />
+          ))}
         </div>
       ) : (
         <div className="noOneAgency">

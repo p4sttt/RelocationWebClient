@@ -3,7 +3,6 @@ import { RequireAuth } from "./hoc/RequireAuth";
 import { AuthProvider } from "./hoc/AuthProvider";
 import { SettingProvider } from "./hoc/SettingsProvider";
 
-import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
@@ -15,7 +14,8 @@ import SettingCountries from "./pages/Settings/SettingCountries";
 import SettingTags from "./pages/Settings/SettingTags";
 
 import "./index.scss";
-import DashboardCountry from "./pages/DashboardCountry";
+import DashboardCountry from "./pages/Dashboard/DashboardCountry";
+import Layout from "./components/Layout";
 
 function App() {
   return (

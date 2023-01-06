@@ -45,7 +45,7 @@ export default function Dashboard() {
   return (
     <>
       <Header name={user.name} />
-      <div className="countries-dashboard">
+      <div className="countries-dashboard" style={{marginTop: 180}}>
         <h1>Your countries</h1>
         <div className="countries-elements">
           {countries ? (
