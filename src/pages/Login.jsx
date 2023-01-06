@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 import "../index.scss";
-import ErrorBox from "../components/ErrorBox";
+import ErrorBox from "../components/ErrorBox/ErrorBox";
 
 export default function Login() {
   const [email, setEmail] = React.useState("");

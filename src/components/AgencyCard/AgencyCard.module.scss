@@ -1,0 +1,35 @@
+.AgencyCard {
+  text-decoration: none;
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px 32px;
+  background: #141414;
+  border-radius: 32px;
+  gap: 16px;
+  p{
+    color: #CCCCCC;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+  }
+}
+.title {
+  img {
+    width: 56px;
+    height:56px;
+    border-radius: 24px;
+  }
+  h1{
+    font-size: 32px;
+    font-weight: 600;
+    color: #E0E0E0;
+  }
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 16px;
+  width: fit-content;
+}

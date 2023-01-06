@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import axios from "../axios";
-import Header from "../components/Header";
-import "../index.scss";
+import Header from "../components/Header/Header";
 
 export default function Dashboard() {
   const { token } = useAuth();
   const [user, setUser] = useState({});
   const [countries, setCountries] = useState([]);
   const [news, setNews] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios({
@@ -49,7 +50,15 @@ export default function Dashboard() {
         <div className="countries-elements">
           {countries ? (
             countries.map((country) => (
-              <div className="country" key={country._id}>
+              <div
+                className="country"
+                key={country._id}
+                onClick={() =>
+                  navigate(country.name, {
+                    state: { country: country.name },
+                  })
+                }
+              >
                 <img alt={country.name} src={country.img} />
               </div>
             ))

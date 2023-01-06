@@ -7,13 +7,13 @@ export default function Form(props) {
     if (props.is_password) {
       return type === "password" ? (
         <img
-          src="./eye-outline.svg"
+          src="/icons/eye-outline.svg"
           alt="eye-open"
           onClick={() => setType("text")}
         />
       ) : (
         <img
-          src="./eye-off-outline.svg"
+          src="/icons/eye-off-outline.svg"
           alt="eye-close"
           onClick={() => setType("password")}
         />

@@ -15,6 +15,7 @@ import SettingCountries from "./pages/Settings/SettingCountries";
 import SettingTags from "./pages/Settings/SettingTags";
 
 import "./index.scss";
+import DashboardCountry from "./pages/DashboardCountry";
 
 function App() {
   return (
@@ -37,7 +38,8 @@ function App() {
                   <Dashboard />
                 </RequireAuth>
               }
-            />
+             />
+            <Route path="dashboard/:country" element={<DashboardCountry />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

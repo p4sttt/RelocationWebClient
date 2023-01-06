@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import Form from "../components/Form";
 import axios from "../axios";
-import ErrorBox from "../components/ErrorBox";
+import ErrorBox from "../components/ErrorBox/ErrorBox";
 
 export default function Register() {
   const navigate = useNavigate();
