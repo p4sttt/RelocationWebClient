@@ -3,12 +3,13 @@ import axios from "../../axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AgencyCard from "../../components/AgencyCard/AgencyCard";
-import Header from "../../components/Header/Header";
+import { useDashboard } from "../../hooks/useDashboard";
 
 export default function DashboardCountry() {
   const { country } = useParams();
   const [agencies, setAgencies] = useState(null);
   const navigate = useNavigate();
+  const {returnData} = useDashboard()
 
   useEffect(() => {
     axios({
@@ -45,6 +46,7 @@ export default function DashboardCountry() {
           <h2>Sorry, but we couldn't find an agency for this country</h2>
         </div>
       )}
+      <button onClick={() => console.log(returnData())}></button>
     </div>
   );
 }

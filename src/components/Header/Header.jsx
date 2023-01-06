@@ -1,7 +1,5 @@
 import React from "react";
 import styles from "./Header.module.scss";
-import UserAvatar from "./user-fill.svg";
-import Settings from "./settings-outline.svg";
 import { motion } from "framer-motion";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +14,7 @@ const Header = (props) => {
       <div className={styles.HeaderWrapper}>
         <div className={styles.Header}>
           <div className={styles.Title}>
-            <img src={props.avatar ? props.avatar : UserAvatar} alt="avatar" />
+            <img src={props.avatar ? props.avatar : "/icons/user-fill.svg"} alt="avatar" />
             <p>{props.name}</p>
           </div>
           <div>
@@ -33,7 +31,7 @@ const Header = (props) => {
               initial={{ opacity: 0.72 }}
               whileHover={{ rotate: 180, opacity: 1 }}
               transition={{ ease: "easeOut", duration: 0.48 }}
-              src={Settings}
+              src="/icons/settings-outline.svg"
               alt="Settings"
               onClick={() => setIsOpen(!isOpen)}
             />

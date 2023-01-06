@@ -1,35 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { useDashboard } from "../hooks/useDashboard";
 import axios from "../axios";
 import Header from "../components/Header/Header";
 
 export default function Dashboard() {
   const { token } = useAuth();
-  const [user, setUser] = useState({});
-  const [countries, setCountries] = useState([]);
-  const [news, setNews] = useState([]);
+  const { returnData, setCountries_, setUser_ } = useDashboard();
+  const [news, setNews] = useState(null);
   const navigate = useNavigate();
 
+  const { countries, user } = returnData();
+
   useEffect(() => {
-    axios({
-      url: "/user",
-      method: "get",
-      headers: {
-        token: token,
-      },
-    })
-      .then((res) => setUser(res.data.user))
-      .catch((res) => console.log(res.response.data.msg));
-    axios({
-      url: "/user/countries",
-      method: "get",
-      headers: {
-        token: token,
-      },
-    })
-      .then((res) => setCountries(res.data.userCountries))
-      .catch((res) => console.log(res.response.data.msg));
+    if (Boolean(!(countries && user))) {
+      axios({
+        url: "/user",
+        method: "get",
+        headers: {
+          token: token,
+        },
+      })
+        .then((res) => setUser_(res.data.user))
+        .catch((res) => console.log(res.response.data.msg));
+      axios({
+        url: "/user/countries",
+        method: "get",
+        headers: {
+          token: token,
+        },
+      })
+        .then((res) => setCountries_(res.data.userCountries))
+        .catch((res) => console.log(res.response.data.msg));
+    }
 
     axios({
       url: "/news",
@@ -44,8 +48,8 @@ export default function Dashboard() {
 
   return (
     <>
-      <Header name={user.name} />
-      <div className="countries-dashboard" style={{marginTop: 180}}>
+      <Header name={user ? user.name : "null"} />
+      <div className="countries-dashboard" style={{ marginTop: 180 }}>
         <h1>Your countries</h1>
         <div className="countries-elements">
           {countries ? (
@@ -86,6 +90,7 @@ export default function Dashboard() {
           )}
         </div>
       </div>
+      {/* <button onClick={() => console.log(user, countries)}></button> */}
     </>
   );
 }
