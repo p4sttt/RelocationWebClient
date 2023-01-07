@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { useDashboard } from "../hooks/useDashboard";
 import axios from "../axios";
 import Header from "../components/Header/Header";
+import CountryCard from "../components/CountryCard/CountryCard";
+import NewsCountry from "../components/NewsCard/NewsCard";
 
 export default function Dashboard() {
   const { token } = useAuth();
   const { returnData, setCountries_, setUser_ } = useDashboard();
   const [news, setNews] = useState(null);
-  const navigate = useNavigate();
 
   const { countries, user } = returnData();
 
@@ -46,6 +46,8 @@ export default function Dashboard() {
       .catch((res) => console.log(res.response.data.msg));
   }, [token]);
 
+  console.log(news)
+
   return (
     <>
       <Header name={user ? user.name : "null"} />
@@ -54,43 +56,34 @@ export default function Dashboard() {
         <div className="countries-elements">
           {countries ? (
             countries.map((country) => (
-              <div
-                className="country"
+              <CountryCard
+                name={country.name}
+                img={country.img}
                 key={country._id}
-                onClick={() =>
-                  navigate(country.name, {
-                    state: { country: country.name },
-                  })
-                }
-              >
-                <img alt={country.name} src={country.img} />
-              </div>
+              />
             ))
           ) : (
             <p>loading...</p>
           )}
         </div>
       </div>
-      <div className="news-dashboard" style={{ marginBottom: 150 }}>
+      <div className="news-dashboard" style={{ marginBottom: 100 }}>
         <h1>Latest news</h1>
         <div className="news-elements">
           {news ? (
             news.map((news) => (
-              <a
-                className="news"
+              <NewsCountry
+                url={news.url}
+                title={news.title}
+                img={news.urlToImage}
                 key={news.publishedAt}
-                href={news.url}
-                target="_ blank"
-              >
-                <img alt={news.title} src={news.urlToImage} />
-              </a>
+              />
             ))
           ) : (
             <p>loading...</p>
           )}
         </div>
       </div>
-      {/* <button onClick={() => console.log(user, countries)}></button> */}
     </>
   );
 }

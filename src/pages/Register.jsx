@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import Form from "../components/Form";
+import Form from "../components/Form/Form";
 import axios from "../axios";
 import ErrorBox from "../components/ErrorBox/ErrorBox";
 

@@ -1,6 +1,7 @@
-import React from "react";
+import React from 'react';
+import styles from './Form.module.scss';
 
-export default function Form(props) {
+const Form = (props) => {
   const [type, setType] = React.useState(props.type);
 
   function is_password() {
@@ -22,7 +23,7 @@ export default function Form(props) {
   }
 
   return (
-    <div className="form">
+    <div className={styles.Form}>
       <input
         autoComplete="off"
         placeholder={props.placeholder}
@@ -34,3 +35,5 @@ export default function Form(props) {
     </div>
   );
 }
+
+export default Form;

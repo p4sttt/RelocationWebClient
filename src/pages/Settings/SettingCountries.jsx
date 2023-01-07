@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "../../axios";
-import Form from "../../components/Form";
+import Form from "../../components/Form/Form";
 import { useSettings } from "../../hooks/useSettings";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
@@ -53,7 +53,7 @@ export default function SettingCountries() {
   };
 
   return (
-    <div className="wrapper margin-top" style={{ width: 600, marginBottom: 200 }}>
+    <div className="wrapper" style={{ width: 600, marginBottom: 200, marginTop: 24 }}>
       <h1>
         Choose a country
         <br />

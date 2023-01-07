@@ -1,0 +1,22 @@
+.Form {
+  width: 350px;
+  height: fit-content;
+  padding: 24px;
+  background: #141414;
+  border: 1px solid #292929;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  input {
+    width: fit-content;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #e0e0e0;
+    border: none;
+    background: none;
+    outline: none;
+  }
+}

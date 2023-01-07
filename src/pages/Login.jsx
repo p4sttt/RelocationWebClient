@@ -1,10 +1,10 @@
 import React from "react";
-import Form from "../components/Form";
 import axios from "../axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 import "../index.scss";
+import Form from "../components/Form/Form";
 import ErrorBox from "../components/ErrorBox/ErrorBox";
 
 export default function Login() {

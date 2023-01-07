@@ -16,7 +16,7 @@ import SettingTags from "./pages/Settings/SettingTags";
 
 import "./index.scss";
 import DashboardCountry from "./pages/Dashboard/DashboardCountry";
-import Layout from "./components/Layout";
+import Layout from "./components/Layout/Layout";
 
 function App() {
   return (
