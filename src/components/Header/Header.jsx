@@ -3,11 +3,22 @@ import styles from "./Header.module.scss";
 import { motion } from "framer-motion";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import axios from "../../axios"
 
 const Header = (props) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const { singout, token } = useAuth();
   const navigate = useNavigate();
+
+  const deleteAccount = () => {
+    axios({
+      url: "/deleteaccount",
+      headers: {
+        token: token
+      }
+    })
+    singout(() => navigate("/"))
+  }
 
   return (
     <>
@@ -24,7 +35,7 @@ const Header = (props) => {
                 <div className={styles.Line}></div>
                 <p onClick={() => singout(() => navigate("/"))}>Log out</p>
                 <div className={styles.Line}></div>
-                <p className={styles.Delete}>Delete account</p>
+                <p className={styles.Delete} onClick={() => deleteAccount()}>Delete account</p>
               </div>
             )}
             <motion.img
