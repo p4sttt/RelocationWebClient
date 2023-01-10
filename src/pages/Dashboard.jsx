@@ -1,52 +1,59 @@
-import React, { useEffect, useState } from "react";
-import { useAuth } from "../hooks/useAuth";
-import { useDashboard } from "../hooks/useDashboard";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../store";
+import { useDashboard } from "../store";
 import axios from "../axios";
 import Header from "../components/Header/Header";
 import CountryCard from "../components/CountryCard/CountryCard";
 import NewsCountry from "../components/NewsCard/NewsCard";
+import shallow from "zustand/shallow";
 
 export default function Dashboard() {
-  const { token } = useAuth();
-  const { returnData, setCountries_, setUser_ } = useDashboard();
-  const [news, setNews] = useState(null);
-
-  const { countries, user } = returnData();
+  const token = useAuth((state) => state.token);
+  const { news, countries, user, setUser, setCountries, setNews } = useDashboard(
+    (state) => ({
+      news: state.news,
+      countries: state.countries,
+      user: state.user,
+      setUser: state.setUser,
+      setCountries: state.setCountries,
+      setNews: state.setNews
+    }),
+    shallow
+  );
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (Boolean(!(countries && user))) {
+    if (Boolean(!(user && countries && news))) {
       axios({
         url: "/user",
         method: "get",
         headers: {
           token: token,
         },
-      })
-        .then((res) => setUser_(res.data.user))
-        .catch((res) => console.log(res.response.data.msg));
+      }).then((res) => {
+        setUser(res.data.user);
+      });
       axios({
         url: "/user/countries",
         method: "get",
         headers: {
           token: token,
         },
+      }).then((res) => {
+        setCountries(res.data.userCountries);
+      });
+      axios({
+        url: "/news",
+        method: "get",
+        headers: {
+          token: token,
+        },
+      }).then(res => {
+        setNews(res.data.news)
       })
-        .then((res) => setCountries_(res.data.userCountries))
-        .catch((res) => console.log(res.response.data.msg));
     }
-
-    axios({
-      url: "/news",
-      method: "get",
-      headers: {
-        token: token,
-      },
-    })
-      .then((res) => setNews(res.data.news))
-      .catch((res) => console.log(res.response.data.msg));
   }, [token]);
-
-  console.log(news)
 
   return (
     <>
@@ -60,6 +67,7 @@ export default function Dashboard() {
                 name={country.name}
                 img={country.img}
                 key={country._id}
+                onClick={() => navigate(country.name)}
               />
             ))
           ) : (

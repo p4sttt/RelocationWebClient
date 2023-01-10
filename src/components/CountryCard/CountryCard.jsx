@@ -1,14 +1,15 @@
 import React from "react";
 import styles from "./CountryCard.module.scss";
-import { useNavigate } from "react-router-dom";
 
 const CountryCard = (props) => {
-  const navigate = useNavigate();
-
   return (
     <div
-      className={styles.CountryCard}
-      onClick={() => navigate(props.name)}
+      className={
+        props.isActive
+          ? `${styles.CountryCard} ${styles.Active}`
+          : styles.CountryCard
+      }
+      onClick={props.onClick}
     >
       <img src={props.img} alt={props.name} />
       <div className={styles.Name}>

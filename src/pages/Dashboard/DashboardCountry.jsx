@@ -3,13 +3,11 @@ import axios from "../../axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AgencyCard from "../../components/AgencyCard/AgencyCard";
-import { useDashboard } from "../../hooks/useDashboard";
 
 export default function DashboardCountry() {
   const { country } = useParams();
   const [agencies, setAgencies] = useState(null);
   const navigate = useNavigate();
-  const {returnData} = useDashboard()
 
   useEffect(() => {
     axios({
@@ -38,15 +36,16 @@ export default function DashboardCountry() {
       {agencies ? (
         <div className="agencies">
           {agencies.map((agency) => (
-            <AgencyCard name={agency.name} key={agency._id} />
+            <AgencyCard
+              name={agency.name}
+              key={agency._id}
+              description={agency.description}
+            />
           ))}
         </div>
       ) : (
-        <div className="noOneAgency">
-          <h2>Sorry, but we couldn't find an agency for this country</h2>
-        </div>
+        <p>loading...</p>
       )}
-      <button onClick={() => console.log(returnData())}></button>
     </div>
   );
 }

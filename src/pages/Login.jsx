@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "../axios";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../store";
+import shallow from "zustand/shallow";
 
 import "../index.scss";
 import Form from "../components/Form/Form";
@@ -14,26 +15,29 @@ export default function Login() {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const { signin } = useAuth();
+  const { signin } = useAuth(
+    (state) => ({ signin: state.signin, token: state.token }),
+    shallow
+  );
 
   const from = location.state?.from?.pathname || "/dashboard";
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios({
+    const res = await axios({
       method: "post",
       url: "/auth/login",
       data: {
         email: email,
         password: password,
       },
-    })
-      .then((res) => {
-        signin(res.data.token, () => navigate(from, { replace: true }));
-      })
-      .catch((res) => {
-        setError(res.response.data.msg);
-      });
+    });
+    if (res.status !== 200) {
+      setError(res.response.data.msg);
+    } else {
+      signin(res.data.token);
+      navigate(from, { replace: true });
+    }
   };
 
   return (

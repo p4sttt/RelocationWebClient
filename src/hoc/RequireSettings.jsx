@@ -1,32 +1,34 @@
+import React from "react";
 import { Navigate } from "react-router-dom";
+import { useSettings, useAuth } from "../store";
 import axios from "../axios";
-import { useAuth } from "../hooks/useAuth";
+import shallow from "zustand/shallow";
 
 const RequireSettings = async ({ children }) => {
-  const { token } = useAuth();
-  let settings = null;
+  const token = useAuth((state) => state.token);
+  const { settings, setSettings } = useSettings(
+    (state) => ({ settings: state.settings, setSettings: state.setSettings }),
+    shallow
+  );
 
-  await axios({
-    method: "get",
-    url: "/settings",
-    headers: {
-      token: token,
-    },
-  }).then((res) => {
-    settings = res.data.settings;
-  });
+  const { temperature, tags, countries } = settings;
 
-  console.log(settings);
-
-  if (
-    settings.tags.length !== 0 &&
-    settings.countries.length !== 0 &&
-    settings.temperature
-  ) {
-    return children;
+  if (!Boolean(temperature && tags && countries)) {
+    const res = await axios({
+      url: "/settings",
+      method: "get",
+      headers: {
+        token: token,
+      },
+    });
+    setSettings(res.data.settings);
+    console.log(settings);
+    if (!Boolean(temperature && tags && countries)) {
+      return <Navigate to="/settings/temperature" />;
+    }
   }
 
-  return <Navigate to="/settings/temperature" replace={true} />;
+  return children;
 };
 
 export { RequireSettings };

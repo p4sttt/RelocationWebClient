@@ -1,12 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useSettings } from "../../hooks/useSettings";
+import { useSettings } from "../../store";
+import shallow from 'zustand/shallow'
 
 export default function SettingTemperature() {
-  const { setTemperature_, returnSettings } = useSettings();
+  const { temperature, setTemperature } = useSettings(state => ({
+    temperature: state.settings.temperature, setTemperature: state.setTemperature
+  }), shallow);
   const navigate = useNavigate();
-
-  const temperature = returnSettings().temperature;
 
   return (
     <div className="wrapper margin-top" style={{ width: 600 }}>
@@ -18,7 +19,7 @@ export default function SettingTemperature() {
       <div className="temperature-btns">
         <button
           className="btn-secondary"
-          onClick={() => setTemperature_(temperature - 1)}
+          onClick={() => setTemperature(temperature - 1)}
         >
           -
         </button>
@@ -28,15 +29,14 @@ export default function SettingTemperature() {
           onClick={() =>
             navigate("/settings/tags", {
               replace: true,
-              state: { temperature: temperature },
             })
           }
         >
-          {temperature}°C
+          {temperature ? temperature : 0}°C
         </button>
         <button
           className="btn-secondary"
-          onClick={() => setTemperature_(temperature + 1)}
+          onClick={() => setTemperature(temperature + 1)}
         >
           +
         </button>

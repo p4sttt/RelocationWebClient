@@ -1,14 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../store";
 import Form from "../components/Form/Form";
 import axios from "../axios";
 import ErrorBox from "../components/ErrorBox/ErrorBox";
 
 export default function Register() {
   const navigate = useNavigate();
-  const { signin } = useAuth();
+  const signin = useAuth((state) => state.signin);
 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -27,13 +27,12 @@ export default function Register() {
       },
     })
       .then((res) => {
-        signin(res.data.token, () =>
-          navigate("/settings/temperature", { replace: true })
-        );
+        signin(res.data.token);
       })
       .catch((err) => {
         setError(err.response.data.msg);
       });
+    navigate("/settings/temperature", { replace: true });
   };
 
   return (
